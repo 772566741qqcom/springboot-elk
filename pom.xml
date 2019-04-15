@@ -9,10 +9,8 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>cn.percent.dolphin.kafka</groupId>
-    <artifactId>publish-kafka</artifactId>
+    <artifactId>springboot-elk</artifactId>
     <version>0.0.2</version>
-    <name>publish-kafka</name>
-    <description>Demo project for Spring Boot</description>
 
     <properties>
         <java.version>1.8</java.version>

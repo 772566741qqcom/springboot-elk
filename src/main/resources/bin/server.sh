@@ -22,7 +22,7 @@ shift
 CMD=$1
 shift
 
-CLASS=cn.percent.dolphin.kafka.publish.PublishKafkaApplication
+CLASS=cn.percent.dolphin.kafka.publish.ELKApplication
 
 
 echo "Begin ${MODULE} ${CMD}......"
