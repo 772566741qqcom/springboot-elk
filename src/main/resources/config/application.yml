@@ -1,0 +1,6 @@
+server:
+ port: 35188
+
+spring:
+  application:
+    name: publish

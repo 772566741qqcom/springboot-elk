@@ -1,0 +1,69 @@
+<!-- Logback configuration. See http://logback.qos.ch/manual/index.html -->
+<configuration scan="true" scanPeriod="120 seconds">
+<!--
+
+  <conversionRule conversionWord="nanos"
+    converterClass="cn.percent.dolphin.common.utils.NanoSampleConverter"/>
+
+  &lt;!&ndash; Simple file output &ndash;&gt;
+  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+  <encoder>
+    <pattern>
+      [%level][%nanos] %date{yyyy-MM-dd HH:mm:ss.SSS} %logger{96}:[%line] - %msg%n
+    </pattern>
+    <charset>UTF-8</charset> &lt;!&ndash; 此处设置字符集 &ndash;&gt;
+  </encoder>
+
+  <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+    &lt;!&ndash; rollover daily &ndash;&gt;
+    <fileNamePattern>logs/tweet-server-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+    <maxFileSize>128MB</maxFileSize>
+    <maxHistory>14</maxHistory>
+    <totalSizeCap>6GB</totalSizeCap>
+  </rollingPolicy>
+  &lt;!&ndash; Log level filter &ndash;&gt;
+  <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+    <level>INFO</level>
+  </filter>
+  &lt;!&ndash; Safely log to the same file from multiple JVMs. Degrades performance! &ndash;&gt;
+  &lt;!&ndash;<prudent>true</prudent>&ndash;&gt;
+</appender>
+
+  &lt;!&ndash; Console output &ndash;&gt;
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    &lt;!&ndash; encoder defaults to ch.qos.logback.classic.encoder.PatternLayoutEncoder &ndash;&gt;
+    <encoder>
+      <pattern>
+        [ %level][%nanos] %date{yyyy-MM-dd HH:mm:ss.SSS} %logger{96}:%line - %msg%n
+      </pattern>
+      <charset>UTF-8</charset> &lt;!&ndash; 此处设置字符集 &ndash;&gt;
+    </encoder>
+    &lt;!&ndash; Log level filter &ndash;&gt;
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+      <level>INFO</level>
+    </filter>
+  </appender>
+
+  <logger name="cn.percent.dolphin.app.dao" level="DEBUG"/>
+  <logger name="cn.percent.dolphin.app.common" level="DEBUG"/>
+
+  <root level="DEBUG">
+    <appender-ref ref="FILE"/>
+    <appender-ref ref="STDOUT"/>
+  </root>
+-->
+
+  <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+    <destination>192.168.110.128:35180</destination>
+    <encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder" />
+  </appender>
+
+  <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+  <root level="INFO">
+    <appender-ref ref="LOGSTASH" />
+    <appender-ref ref="CONSOLE" />
+  </root>
+
+
+</configuration>
