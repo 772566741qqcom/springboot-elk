@@ -1,4 +1,4 @@
-package cn.percent.dolphin.kafka.publish;
+package cn.percent.dolphin.kafka;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

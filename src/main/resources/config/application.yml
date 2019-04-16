@@ -1,6 +1,27 @@
 server:
- port: 35188
+ port: 9092
+
+logging:
+  config: classpath:logback-spring.xml
 
 spring:
   application:
-    name: publish
+    name: springboot-elk-kafka
+  kafka:
+    bootstrap-servers: 192.168.110.128:9092,192.168.110.129:9092,192.168.110.130:9092
+    producer:
+      retries: 0
+      # 每次批量发送消息的数量
+      batch-size: 16384
+        # 缓存容量
+      buffer-memory: 33554432
+       # 指定消息key和消息体的编解码方式
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      group-id: consumer
+      auto-commit-interval: 100
+      auto-offset-reset: earliest
+      enable-auto-commit: true
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
